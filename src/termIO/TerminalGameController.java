@@ -16,11 +16,20 @@ public class TerminalGameController implements IGameController {
 		while(true) {
 			try {
 				System.out.print(" Enter field to uncover (X|Y): ");
-				return new Coords(scanner.nextInt(), scanner.nextInt());
-			} catch(final InputMismatchException e) {
-				System.out.println("\n Invalid input!\n");
-				scanner.nextLine();
-			}	
+				final Coords c = new Coords(scanner.nextInt(), scanner.nextInt());
+				
+				
+				if (
+						(c.getX() > 0) && (c.getY() > 0) &&
+						(c.getX() < gameState.getWidth()) &&
+						(c.getY() < gameState.getHeight()))
+					
+					return c;
+
+			} catch(final InputMismatchException e) { }	
+			
+			System.out.println("\n Invalid input!\n");
+			scanner.nextLine();
 		}
 	}
 }
