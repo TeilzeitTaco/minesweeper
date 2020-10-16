@@ -59,7 +59,6 @@ public class GameState {
 						neighbours.put(Direction.downRight, mineField[y + 1][x + 1]);
 					}
 				}
-
 				
 				if (leftExists)
 					neighbours.put(Direction.left, mineField[y][x - 1]);
