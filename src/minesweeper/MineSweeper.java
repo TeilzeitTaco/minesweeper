@@ -28,8 +28,14 @@ public class MineSweeper {
 			} 
 			
 			f.uncover();
+			
 			if (f.isMine()) {
 				gameVisualiser.onGameOver(c);
+				break;
+			}
+			
+			if (gameState.getFieldCount() - gameState.getUncoveredFieldCount() == gameState.getMineCount()) {
+				gameVisualiser.onGameWon(c);
 				break;
 			}
 		}

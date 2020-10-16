@@ -51,17 +51,23 @@ public class TerminalGameVisualiser implements IGameVisualiser {
 				if (f.isUncovered()) {
 					System.out.print(f.getNeighbouringMineCount() + " ");
 				} else {
-					System.out.print("+ ");
+					System.out.print("~ ");
 				}
 			}
 			System.out.println();
 		}
-		System.out.println();
+		System.out.println("\n " + (gameState.getFieldCount() - gameState.getUncoveredFieldCount()) + 
+				" uncertain fields remaining, thereof mines: " + gameState.getMineCount());
 	}
 
 	@Override
 	public void onGameOver(final Coords c) {
 		System.out.println("\n Game Over!");
+	}
+	
+	@Override
+	public void onGameWon(final Coords c) {
+		System.out.println("\n You won!");
 	}
 
 	@Override

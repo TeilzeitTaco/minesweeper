@@ -16,6 +16,13 @@ public interface IGameVisualiser {
 	void onGameOver(final Coords c);
 	
 	/**
+	 * Called when the last non-mine field is uncovered.
+	 * 
+	 * @param The coordinates of the last move.
+	 */
+	void onGameWon(final Coords c);
+	
+	/**
 	 * Called when the user attempts a illegal move.
 	 * 
 	 * @param The coordinates of the move.

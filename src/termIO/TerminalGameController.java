@@ -20,7 +20,7 @@ public class TerminalGameController implements IGameController {
 				
 				
 				if (
-						(c.getX() > 0) && (c.getY() > 0) &&
+						(c.getX() >= 0) && (c.getY() >= 0) &&
 						(c.getX() < gameState.getWidth()) &&
 						(c.getY() < gameState.getHeight()))
 					

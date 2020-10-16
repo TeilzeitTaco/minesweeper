@@ -10,6 +10,34 @@ public class GameState {
 	
 	private final Random random = new Random();
 	
+	public int getMineCount() {
+		int mineCount = 0;
+		for (final Field[] fr : mineField) {
+			for (final Field f : fr) {
+				if (f.isMine())
+					mineCount++;
+			}
+		}
+		
+		return mineCount;
+	}
+	
+	public int getUncoveredFieldCount() {
+		int mineCount = 0;
+		for (final Field[] fr : mineField) {
+			for (final Field f : fr) {
+				if (f.isUncovered())
+					mineCount++;
+			}
+		}
+		
+		return mineCount;
+	}
+	
+	public int getFieldCount() {
+		return width * height;
+	}
+	
 	public GameState(final int width, final int heigth, final float difficulty) {
 		this.width = width;
 		this.height = heigth;
