@@ -26,6 +26,8 @@ public class TerminalGameVisualiser implements IGameVisualiser {
 		final int width = gameState.getWidth();
 		
 		clearScreen();
+		
+		// The horizontal labels
 		System.out.print("      ");
 		for (int x = 0; x < width; x++) {
 			if (x % 2 == 0) continue;
@@ -38,9 +40,9 @@ public class TerminalGameVisualiser implements IGameVisualiser {
 			if (x % 2 == 1) continue;
 			System.out.print(String.format("%02d| ", x));
 		}
-		
 		System.out.println("\n      " + "| ".repeat(width));
 		
+		// The board
 		for (int y = 0; y < gameState.getHeight(); y++) {
 			System.out.print(String.format(" %02d - ", y));
 			
