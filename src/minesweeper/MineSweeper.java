@@ -15,7 +15,7 @@ public class MineSweeper {
 		
 		gameState = new GameState(48, 16, 0.35f);
 		while(true) {
-			gameVisualiser.updateGameOutput(gameState);
+			gameVisualiser.onFieldUpdate(gameState);
 			
 			// Let the player pick a new field
 			final Coords c = gameController.getNextFieldToUncover(gameState);

@@ -6,7 +6,7 @@ public interface IGameVisualiser {
 	 * 
 	 * @param The current game state.
 	 */
-	void updateGameOutput(final GameState gameState);
+	void onFieldUpdate(final GameState gameState);
 	
 	/**
 	 * Called when a mine gets triggered.

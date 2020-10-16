@@ -21,7 +21,7 @@ public class TerminalGameVisualiser implements IGameVisualiser {
 	}
 	
 	@Override
-	public void updateGameOutput(final GameState gameState) {
+	public void onFieldUpdate(final GameState gameState) {
 		final Field[][] mineField = gameState.getMineField();
 		
 		clearScreen();
