@@ -13,7 +13,7 @@ public class MineSweeper {
 		gameVisualiser = new TerminalGameVisualiser();
 		gameController = new TerminalGameController();
 		
-		gameState = new GameState(24, 16, 0.2f);
+		gameState = new GameState(24, 16, 0.1f);
 		while(true) {
 			gameVisualiser.onFieldUpdate(gameState);
 			
