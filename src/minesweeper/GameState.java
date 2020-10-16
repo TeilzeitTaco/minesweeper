@@ -5,10 +5,9 @@ import java.util.Random;
 
 
 public class GameState {
-	private final int width, height;
-	private final Field[][] mineField;
-	
 	private final Random random = new Random();
+	private final Field[][] mineField;
+	private final Config config;
 	
 	public int getMineCount() {
 		int mineCount = 0;
@@ -35,25 +34,23 @@ public class GameState {
 	}
 	
 	public int getFieldCount() {
-		return width * height;
+		return config.getWidth() * config.getHeight();
 	}
 	
-	public GameState(final int width, final int heigth, final float difficulty) {
-		this.width = width;
-		this.height = heigth;
+	public GameState(final Config config) {
+		this.config = config;
 		
 		// Generate the field
-		mineField = new Field[height][width];
-		
+		mineField = new Field[config.getHeight()][config.getWidth()];
 		for (int y = 0; y < mineField.length; y++) {
 			for (int x = 0; x < mineField[y].length; x++) {
-				mineField[y][x] = new Field(random.nextFloat() < difficulty);
+				mineField[y][x] = new Field(random.nextFloat() < config.getDifficulty());
 			}
 		}
 		
 		// Link up the fields with each other, dirty.
-		for (int y = 0; y < mineField.length; y++) {
-			for (int x = 0; x < mineField[y].length; x++) {
+		for (int y = 0; y < config.getHeight(); y++) {
+			for (int x = 0; x < config.getWidth(); x++) {
 				final HashMap<Direction, Field> neighbours = mineField[y][x].getNeighbours();
 				
 				final boolean 
@@ -99,7 +96,10 @@ public class GameState {
 
 		// Uncover initial mine
 		while(true) {
-			final Field f = mineField[random.nextInt(heigth)][random.nextInt(width)];
+			final Field f = mineField
+					[random.nextInt(config.getHeight())]
+					[random.nextInt(config.getWidth())];
+			
 			if (!f.isMine() && f.getNeighbouringMineCount() == 0) {
 				f.uncover();
 				break;
@@ -115,11 +115,7 @@ public class GameState {
 		return mineField;
 	}
 	
-	public int getWidth() {
-		return width;
-	}
-	
-	public int getHeight() {
-		return height;
+	public Config getConfig() {
+		return config;
 	}
 }

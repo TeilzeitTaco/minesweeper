@@ -1,5 +1,6 @@
 package minesweeper;
 
+
 public interface IGameVisualiser {
 	/**
 	 * Implementation should update the visual game display.

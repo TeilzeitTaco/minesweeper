@@ -1,19 +1,23 @@
 package minesweeper;
 
+import termIO.TerminalGameConfigurator;
 import termIO.TerminalGameController;
 import termIO.TerminalGameVisualiser;
 
 
 public class MineSweeper {
+	private static IGameConfigurator gameConfigurator;
 	private static IGameVisualiser gameVisualiser;
 	private static IGameController gameController;
+	
 	private static GameState gameState;
 	
 	public static void main(final String[] args) {
+		gameConfigurator = new TerminalGameConfigurator();
 		gameVisualiser = new TerminalGameVisualiser();
 		gameController = new TerminalGameController();
 		
-		gameState = new GameState(24, 16, 0.1f);
+		gameState = new GameState(gameConfigurator.getConfig());
 		while(true) {
 			gameVisualiser.onFieldUpdate(gameState);
 			

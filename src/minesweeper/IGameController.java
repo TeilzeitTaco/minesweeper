@@ -1,5 +1,6 @@
 package minesweeper;
 
+
 public interface IGameController {
 	/**
 	 * Interface implemented to control the game.

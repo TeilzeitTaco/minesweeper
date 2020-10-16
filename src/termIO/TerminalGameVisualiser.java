@@ -23,7 +23,7 @@ public class TerminalGameVisualiser implements IGameVisualiser {
 	@Override
 	public void onFieldUpdate(final GameState gameState) {
 		final Field[][] mineField = gameState.getMineField();
-		final int width = gameState.getWidth();
+		final int width = gameState.getConfig().getWidth();
 		
 		clearScreen();
 		
@@ -43,7 +43,7 @@ public class TerminalGameVisualiser implements IGameVisualiser {
 		System.out.println("\n      " + "| ".repeat(width));
 		
 		// The board
-		for (int y = 0; y < gameState.getHeight(); y++) {
+		for (int y = 0; y < gameState.getConfig().getHeight(); y++) {
 			System.out.print(String.format(" %02d - ", y));
 			
 			for (int x = 0; x < width; x++) {
