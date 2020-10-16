@@ -68,6 +68,15 @@ public class GameState {
 					neighbours.put(Direction.right, mineField[y][x + 1]);
 			}
 		}
+
+		// Uncover initial mine
+		while(true) {
+			final Field f = mineField[random.nextInt(heigth)][random.nextInt(width)];
+			if (!f.isMine() && f.getNeighbouringMineCount() == 0) {
+				f.uncover();
+				break;
+			}
+		}
 	}
 	
 	public Field getField(final Coords c) {
