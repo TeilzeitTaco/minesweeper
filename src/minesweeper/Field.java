@@ -40,5 +40,13 @@ public class Field {
 			throw new IllegalStateException("Attempted to double-uncover field!");
 		
 		uncovered = true;
+		if (getNeighbouringMineCount() == 0) {
+			for (final Entry<Direction, Field> e : neighbours.entrySet()) {
+				final Field f = e.getValue();
+				if (!f.isUncovered()) {
+					f.uncover();
+				}	
+			} 
+		}
 	}
 }

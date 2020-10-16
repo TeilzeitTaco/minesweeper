@@ -1,5 +1,6 @@
 package termIO;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import minesweeper.Coords;
@@ -12,7 +13,14 @@ public class TerminalGameController implements IGameController {
 	
 	@Override
 	public Coords getNextFieldToUncover(final GameState gameState) {
-		System.out.print("Enter field to uncover (X|Y): ");
-		return new Coords(scanner.nextInt(), scanner.nextInt());
+		while(true) {
+			try {
+				System.out.print(" Enter field to uncover (X|Y): ");
+				return new Coords(scanner.nextInt(), scanner.nextInt());
+			} catch(final InputMismatchException e) {
+				System.out.println("\n Invalid input!\n");
+				scanner.nextLine();
+			}	
+		}
 	}
 }

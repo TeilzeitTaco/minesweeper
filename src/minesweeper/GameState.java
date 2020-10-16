@@ -23,6 +23,7 @@ public class GameState {
 			}
 		}
 		
+		// Link up the fields with each other, dirty.
 		for (int y = 0; y < mineField.length; y++) {
 			for (int x = 0; x < mineField[y].length; x++) {
 				final HashMap<Direction, Field> neighbours = mineField[y][x].getNeighbours();
@@ -65,7 +66,7 @@ public class GameState {
 
 				
 				if (rightExists) 
-					neighbours.put(Direction.up, mineField[y][x + 1]);
+					neighbours.put(Direction.right, mineField[y][x + 1]);
 			}
 		}
 	}

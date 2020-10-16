@@ -25,12 +25,15 @@ public class TerminalGameVisualiser implements IGameVisualiser {
 		final Field[][] mineField = gameState.getMineField();
 		
 		clearScreen();
-		for (final Field[] r : mineField) {
-			for (final Field f : r) {
+		for (int y = 0; y < mineField.length; y++) {
+			System.out.print(String.format(" [%02d] ", y));
+			
+			for (int x = 0; x < mineField[y].length; x++) {
+				final Field f = mineField[y][x];
 				if (f.isUncovered()) {
-					System.out.print(f.getNeighbouringMineCount());
+					System.out.print(f.getNeighbouringMineCount() + " ");
 				} else {
-					System.out.print("~");
+					System.out.print("+ ");
 				}
 			}
 			System.out.println();
@@ -40,12 +43,12 @@ public class TerminalGameVisualiser implements IGameVisualiser {
 
 	@Override
 	public void onGameOver(final Coords c) {
-		System.out.println("\nGame Over!");
+		System.out.println("\n Game Over!");
 	}
 
 	@Override
 	public void onIllegalMove(final Coords c) {
-		System.out.println("\nIllegal Move!");
+		System.out.println("\n Illegal Move!");
 		waitForEnter();
 	}
 }
