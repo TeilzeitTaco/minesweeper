@@ -51,7 +51,12 @@ public class TerminalGameVisualiser implements IGameVisualiser {
 			for (int x = 0; x < width; x++) {
 				final Field f = mineField[y][x];
 				if (f.isUncovered()) {
-					System.out.print(f.getNeighbouringMineCount() + " ");
+					final int neighbouringCount = f.getNeighbouringMineCount();
+					if (neighbouringCount == 0) {
+						System.out.print("  ");
+					} else {
+						System.out.print(neighbouringCount + " ");
+					}
 				} else {
 					System.out.print(". ");
 				}
