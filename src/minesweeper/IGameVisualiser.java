@@ -9,7 +9,7 @@ package minesweeper;
  */
 public interface IGameVisualiser {
 	/**
-	 * Implementation should update the visual game display.
+	 * Called when the mine field changes.
 	 * 
 	 * @param gameState The current game state.
 	 */

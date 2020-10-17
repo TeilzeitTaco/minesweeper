@@ -9,7 +9,7 @@ package minesweeper;
  */
 public interface IGameController {
 	/**
-	 * Interface implemented to control the game.
+	 * Generate the coordinates of the next field that should be uncovered.
 	 * 
 	 * @param gameState The current game state.
 	 * @return The coordinates of the next field to be uncovered.
