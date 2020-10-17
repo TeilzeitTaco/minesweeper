@@ -38,7 +38,9 @@ public class TerminalGameVisualiser implements IGameVisualiser {
 		System.out.print("     " + "   |".repeat(mineField[0].length / 2) + "\n      ");
 		for (int x = 0; x < width; x++) {
 			if (x % 2 == 1) continue;
-			System.out.print(String.format("%02d| ", x));
+			System.out.print(String.format("%02d", x));
+			if (x < width - 1)
+				System.out.print("| ");
 		}
 		System.out.println("\n      " + "| ".repeat(width));
 		

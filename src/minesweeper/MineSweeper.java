@@ -13,6 +13,8 @@ public class MineSweeper {
 	private static GameState gameState;
 	
 	public static void main(final String[] args) {
+		// All the dirty non-pure game code has been
+		// pushed away into these interfaces.
 		gameConfigurator = new TerminalGameConfigurator();
 		gameVisualiser = new TerminalGameVisualiser();
 		gameController = new TerminalGameController();
