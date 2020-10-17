@@ -1,7 +1,8 @@
 package minesweeper;
 
 import swingIO.SwingGameConfigurator;
-import termIO.TerminalGameConfigurator;
+
+// import termIO.TerminalGameConfigurator;
 import termIO.TerminalGameController;
 import termIO.TerminalGameVisualiser;
 

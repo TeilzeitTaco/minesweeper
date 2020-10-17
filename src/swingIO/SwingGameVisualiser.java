@@ -6,26 +6,30 @@ import minesweeper.IGameVisualiser;
 
 
 public class SwingGameVisualiser implements IGameVisualiser {
+	public SwingGameVisualiser() {
+		
+	}
+	
 	@Override
-	public void onFieldUpdate(GameState gameState) {
+	public void onFieldUpdate(final GameState gameState) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void onGameOver(Coords c) {
+	public void onGameOver(final Coords c) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void onGameWon(Coords c) {
+	public void onGameWon(final Coords c) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void onIllegalMove(Coords c) {
+	public void onIllegalMove(final Coords c) {
 		// TODO Auto-generated method stub
 		
 	}
