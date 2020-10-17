@@ -2,7 +2,7 @@ package minesweeper;
 
 
 /**
- * Implementations of this class should allow the player
+ * Implementations of this interface should allow the player
  * to control the game.
  * 
  * @author SeiJ
