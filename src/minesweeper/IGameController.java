@@ -5,7 +5,7 @@ public interface IGameController {
 	/**
 	 * Interface implemented to control the game.
 	 * 
-	 * @param The current game state.
+	 * @param gameState The current game state.
 	 * @return The coordinates of the next field to be uncovered.
 	 */
 	Coords getNextFieldToUncover(final GameState gameState);
