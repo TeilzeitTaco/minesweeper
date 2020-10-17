@@ -51,7 +51,7 @@ public class TerminalGameVisualiser implements IGameVisualiser {
 				if (f.isUncovered()) {
 					System.out.print(f.getNeighbouringMineCount() + " ");
 				} else {
-					System.out.print("~ ");
+					System.out.print(". ");
 				}
 			}
 			System.out.println();
