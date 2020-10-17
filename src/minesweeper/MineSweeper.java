@@ -5,6 +5,11 @@ import termIO.TerminalGameController;
 import termIO.TerminalGameVisualiser;
 
 
+/**
+ * The main game driver class.
+ * 
+ * @author SeiJ
+ */
 public class MineSweeper {
 	private static IGameConfigurator gameConfigurator;
 	private static IGameVisualiser gameVisualiser;

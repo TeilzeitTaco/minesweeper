@@ -4,38 +4,17 @@ import java.util.HashMap;
 import java.util.Random;
 
 
+/**
+ * Represents the current state of the game.
+ * This holds the array of Fields, the game configuration,
+ * and contains methods to get more insight into the mine field.
+ * 
+ * @author SeiJ
+ */
 public class GameState {
 	private final Random random = new Random();
 	private final Field[][] mineField;
 	private final Config config;
-	
-	public int getMineCount() {
-		int mineCount = 0;
-		for (final Field[] fr : mineField) {
-			for (final Field f : fr) {
-				if (f.isMine())
-					mineCount++;
-			}
-		}
-		
-		return mineCount;
-	}
-	
-	public int getUncoveredFieldCount() {
-		int mineCount = 0;
-		for (final Field[] fr : mineField) {
-			for (final Field f : fr) {
-				if (f.isUncovered())
-					mineCount++;
-			}
-		}
-		
-		return mineCount;
-	}
-	
-	public int getFieldCount() {
-		return config.getWidth() * config.getHeight();
-	}
 	
 	public GameState(final Config config) {
 		this.config = config;
@@ -105,6 +84,34 @@ public class GameState {
 				break;
 			}
 		}
+	}
+	
+	public int getMineCount() {
+		int mineCount = 0;
+		for (final Field[] fr : mineField) {
+			for (final Field f : fr) {
+				if (f.isMine())
+					mineCount++;
+			}
+		}
+		
+		return mineCount;
+	}
+	
+	public int getUncoveredFieldCount() {
+		int mineCount = 0;
+		for (final Field[] fr : mineField) {
+			for (final Field f : fr) {
+				if (f.isUncovered())
+					mineCount++;
+			}
+		}
+		
+		return mineCount;
+	}
+	
+	public int getFieldCount() {
+		return config.getWidth() * config.getHeight();
 	}
 	
 	public Field getField(final Coords c) {
