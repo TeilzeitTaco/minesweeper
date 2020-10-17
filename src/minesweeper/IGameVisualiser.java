@@ -1,6 +1,12 @@
 package minesweeper;
 
 
+/**
+ * Implementations of this interface should represent
+ * the received events to the user.
+ * 
+ * @author SeiJ
+ */
 public interface IGameVisualiser {
 	/**
 	 * Implementation should update the visual game display.

@@ -42,6 +42,12 @@ public class Field {
 		return mineCount;
 	}
 	
+	/**
+	 * Uncover this field, and if it isn't a mine has no neighboring mines,
+	 * uncover all neighboring mines.
+	 * 
+	 * @throws IllegalStateException If this field was already uncovered.
+	 */
 	public void uncover() throws IllegalStateException {
 		if (uncovered)
 			throw new IllegalStateException("Attempted to double-uncover field!");

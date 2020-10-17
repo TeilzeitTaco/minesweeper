@@ -1,6 +1,12 @@
 package minesweeper;
 
 
+/**
+ * Implementations of this class should allow the player
+ * to control the game.
+ * 
+ * @author SeiJ
+ */
 public interface IGameController {
 	/**
 	 * Interface implemented to control the game.
