@@ -16,6 +16,8 @@ public class Field {
 	private final boolean mine;
 	private boolean uncovered;
 	
+	private byte cachedNeighbouringMineCount = -1;
+	
 	public Field(final boolean mine) {
 		this.mine = mine;
 	}
@@ -24,11 +26,16 @@ public class Field {
 		return uncovered;
 	}
 	
-	public byte getNeighbouringMineCount() {		
-		return (byte) neighbours
-				.values().stream()
-				.filter(Field::isMine)
-				.count();
+	public byte getNeighbouringMineCount() {
+		// This, in general, doesn't change at all.
+		if (cachedNeighbouringMineCount == -1) {
+			cachedNeighbouringMineCount = (byte) neighbours
+					.values().stream()
+					.filter(Field::isMine)
+					.count();
+		}
+		
+		return cachedNeighbouringMineCount;
 	}
 	
 	@Package boolean isMine() {
