@@ -2,6 +2,7 @@ package minesweeper;
 
 import java.util.HashMap;
 import java.util.Random;
+import java.util.stream.Stream;
 
 
 /**
@@ -87,27 +88,17 @@ public class GameState {
 	}
 	
 	public int getMineCount() {
-		int mineCount = 0;
-		for (final Field[] fr : mineField) {
-			for (final Field f : fr) {
-				if (f.isMine())
-					mineCount++;
-			}
-		}
-		
-		return mineCount;
+		return (int) Stream.of(mineField)
+				.flatMap(mf -> Stream.of(mf))
+				.filter(Field::isMine)
+				.count();
 	}
 	
 	public int getUncoveredFieldCount() {
-		int mineCount = 0;
-		for (final Field[] fr : mineField) {
-			for (final Field f : fr) {
-				if (f.isUncovered())
-					mineCount++;
-			}
-		}
-		
-		return mineCount;
+		return (int) Stream.of(mineField)
+				.flatMap(mf -> Stream.of(mf))
+				.filter(Field::isUncovered)
+				.count();
 	}
 	
 	public int getFieldCount() {
