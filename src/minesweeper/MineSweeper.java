@@ -1,11 +1,6 @@
 package minesweeper;
 
-import swingIO.SwingGameConfigurator;
-import swingIO.SwingGameVisualiser;
-
-import termIO.TerminalGameConfigurator;
-import termIO.TerminalGameController;
-import termIO.TerminalGameVisualiser;
+import swingIO.SwingGameFrontend;
 
 
 /**
@@ -14,22 +9,16 @@ import termIO.TerminalGameVisualiser;
  * @author SeiJ
  */
 public class MineSweeper {
-	private static IGameConfigurator gameConfigurator;
-	private static IGameVisualiser gameVisualiser;
-	private static IGameController gameController;
-	
-	private static GameState gameState;
-	
 	public static void main(final String[] args) {
 		// All the dirty non-pure game code has been
-		// pushed away into these interfaces.
-		gameConfigurator = new TerminalGameConfigurator();
+		// pushed away into these interfaces.		
+		final IGameFrontend gameFrontend = new SwingGameFrontend();
 		
-		SwingGameVisualiser x = new SwingGameVisualiser();
-		gameVisualiser = x;
-		gameController = x;
+		final IGameConfigurator gameConfigurator = gameFrontend.getGameConfigurator();
+		final IGameVisualiser gameVisualiser = gameFrontend.getGameVisualiser();
+		final IGameController gameController = gameFrontend.getGameController();
 		
-		gameState = new GameState(gameConfigurator.getConfig());
+		final GameState gameState = new GameState(gameConfigurator.getConfig());
 		while(true) {
 			gameVisualiser.onFieldUpdate(gameState);
 			

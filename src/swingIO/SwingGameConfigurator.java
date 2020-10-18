@@ -15,7 +15,7 @@ public class SwingGameConfigurator implements IGameConfigurator {
 		final JSlider jsw = new JSlider();
 		jsw.setBounds(95, 2, 100, 20);
 		jsw.setMinimum(8);
-		jsw.setMaximum(80);
+		jsw.setMaximum(40);
 		
 		final JLabel jlw = new JLabel("Minefield width");
 		jlw.setBounds(5, 0, 100, 20);
@@ -24,7 +24,7 @@ public class SwingGameConfigurator implements IGameConfigurator {
 		final JSlider jsh = new JSlider();
 		jsh.setBounds(95, 22, 100, 20);
 		jsh.setMinimum(8);
-		jsh.setMaximum(80);
+		jsh.setMaximum(40);
 		
 		final JLabel jlh = new JLabel("Minefield height");
 		jlh.setBounds(5, 20, 100, 20);
@@ -60,7 +60,7 @@ public class SwingGameConfigurator implements IGameConfigurator {
 		
 		jf.setSize(320, 100); 
 		jf.setLayout(null);
-		jf.setTitle("MineSweeper Config");
+		jf.setTitle("Minesweeper Config");
 		jf.setVisible(true);
 		
 		// Wait for button press
