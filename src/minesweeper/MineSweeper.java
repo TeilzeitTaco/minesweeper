@@ -1,6 +1,7 @@
 package minesweeper;
 
 import swingIO.SwingGameConfigurator;
+import swingIO.SwingGameVisualiser;
 
 import termIO.TerminalGameConfigurator;
 import termIO.TerminalGameController;
@@ -23,8 +24,10 @@ public class MineSweeper {
 		// All the dirty non-pure game code has been
 		// pushed away into these interfaces.
 		gameConfigurator = new TerminalGameConfigurator();
-		gameVisualiser = new TerminalGameVisualiser();
-		gameController = new TerminalGameController();
+		
+		SwingGameVisualiser x = new SwingGameVisualiser();
+		gameVisualiser = x;
+		gameController = x;
 		
 		gameState = new GameState(gameConfigurator.getConfig());
 		while(true) {

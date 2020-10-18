@@ -14,7 +14,7 @@ import java.util.Map.Entry;
 public class Field {
 	private final HashMap<Direction, Field> neighbours = new HashMap<>();
 	private final boolean mine;
-	private boolean uncovered;
+	private boolean uncovered, flagged;
 	
 	private byte cachedNeighbouringMineCount = -1;
 	
@@ -24,6 +24,20 @@ public class Field {
 	
 	public boolean isUncovered() {
 		return uncovered;
+	}
+	
+	/**
+	 * The flagged member represents the player's
+	 * suspicion that a certain field might be a mine.
+	 * 
+	 * @return The current flag state.
+	 */
+	public boolean isFlagged() {
+		return flagged;
+	}
+	
+	public void setFlagged(final boolean flagged) {
+		this.flagged = flagged;
 	}
 	
 	public byte getNeighbouringMineCount() {
