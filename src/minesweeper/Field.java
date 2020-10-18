@@ -20,16 +20,8 @@ public class Field {
 		this.mine = mine;
 	}
 	
-	public boolean isMine() {
-		return mine;
-	}
-	
 	public boolean isUncovered() {
 		return uncovered;
-	}
-	
-	public HashMap<Direction, Field> getNeighbours() {
-		return neighbours;
 	}
 	
 	public byte getNeighbouringMineCount() {
@@ -42,13 +34,21 @@ public class Field {
 		return mineCount;
 	}
 	
+	@Package boolean isMine() {
+		return mine;
+	}
+	
+	@Package HashMap<Direction, Field> getNeighbours() {
+		return neighbours;
+	}
+	
 	/**
 	 * Uncover this field, and if it isn't a mine has no neighboring mines,
 	 * uncover all neighboring mines.
 	 * 
 	 * @throws IllegalStateException If this field was already uncovered.
 	 */
-	public void uncover() throws IllegalStateException {
+	@Package void uncover() throws IllegalStateException {
 		if (uncovered)
 			throw new IllegalStateException("Attempted to double-uncover field!");
 		
