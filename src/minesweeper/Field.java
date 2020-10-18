@@ -24,14 +24,13 @@ public class Field {
 		return uncovered;
 	}
 	
-	public byte getNeighbouringMineCount() {
-		byte mineCount = 0;
-		for (final Entry<Direction, Field> e : neighbours.entrySet()) {
-			if (e.getValue().isMine())
-				mineCount++;
-		}
-		
-		return mineCount;
+	public byte getNeighbouringMineCount() {		
+		return (byte) neighbours
+				.entrySet()
+				.stream()
+				.map(Entry::getValue)
+				.filter(Field::isMine)
+				.count();
 	}
 	
 	@Package boolean isMine() {
@@ -54,12 +53,12 @@ public class Field {
 		
 		uncovered = true;
 		if (getNeighbouringMineCount() == 0) {
-			for (final Entry<Direction, Field> e : neighbours.entrySet()) {
-				final Field f = e.getValue();
-				if (!f.isUncovered()) {
-					f.uncover();
-				}	
-			} 
+			neighbours
+				.entrySet()
+				.stream()
+				.map(Entry::getValue)
+				.filter(e -> !e.isUncovered())
+				.forEach(Field::uncover);
 		}
 	}
 }

@@ -1,7 +1,7 @@
 package minesweeper;
 
 
-public class Config {
+public final class Config {
 	private final int width, height;
 	private final float difficulty;
 	
