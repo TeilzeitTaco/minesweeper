@@ -26,9 +26,7 @@ public class Field {
 	
 	public byte getNeighbouringMineCount() {		
 		return (byte) neighbours
-				.entrySet()
-				.stream()
-				.map(Entry::getValue)
+				.values().stream()
 				.filter(Field::isMine)
 				.count();
 	}
@@ -54,9 +52,7 @@ public class Field {
 		uncovered = true;
 		if (getNeighbouringMineCount() == 0) {
 			neighbours
-				.entrySet()
-				.stream()
-				.map(Entry::getValue)
+				.values().stream()
 				.filter(e -> !e.isUncovered())
 				.forEach(Field::uncover);
 		}
