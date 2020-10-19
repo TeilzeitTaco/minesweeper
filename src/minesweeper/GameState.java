@@ -28,6 +28,10 @@ public class GameState {
 			}
 		}
 		
+		// Generate at least one non-mine field
+		final int initialNonMineX = random.nextInt(config.getWidth()), initialNonMineY = random.nextInt(config.getHeight());
+		mineField[initialNonMineY][initialNonMineX] = new Field(false);
+		
 		// Link up the fields with each other, dirty.
 		for (int y = 0; y < config.getHeight(); y++) {
 			for (int x = 0; x < config.getWidth(); x++) {
@@ -75,16 +79,7 @@ public class GameState {
 		}
 
 		// Uncover initial mine
-		while(true) {
-			final Field f = mineField
-					[random.nextInt(config.getHeight())]
-					[random.nextInt(config.getWidth())];
-			
-			if (!f.isMine() && f.getNeighbouringMineCount() == 0) {
-				f.uncover();
-				break;
-			}
-		}
+		mineField[initialNonMineY][initialNonMineX].uncover();
 	}
 	
 	public int getMineCount() {

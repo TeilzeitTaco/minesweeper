@@ -17,6 +17,8 @@ import minesweeper.IGameController;
 
 
 public class SwingGameVisualiser implements IGameVisualiser, IGameController {
+	private static final Color uncoveredFieldColor = new Color(255, 112, 102);
+	
 	private JFrame jf;
 	private boolean initialized;
 	
@@ -91,7 +93,7 @@ public class SwingGameVisualiser implements IGameVisualiser, IGameController {
 		            	jb.setMargin(new Insets(0, 0, 0, 0));
 	            	}
 	            } else {
-	            	jb.setBackground(Color.DARK_GRAY);
+	            	jb.setBackground(uncoveredFieldColor);
 	            }
 	        }
 	    }

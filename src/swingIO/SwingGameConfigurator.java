@@ -1,5 +1,9 @@
 package swingIO;
 
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+
 import javax.swing.*;
 
 import minesweeper.Config;
@@ -11,55 +15,66 @@ public class SwingGameConfigurator implements IGameConfigurator {
 	
 	@Override
 	public Config getConfig() {
-		// Width
-		final JSlider jsw = new JSlider();
-		jsw.setBounds(95, 2, 100, 20);
-		jsw.setMinimum(8);
-		jsw.setMaximum(40);
+		final JPanel jp = new JPanel();
+	    jp.setLayout(new GridBagLayout());
+	    
+		final GridBagConstraints c = new GridBagConstraints();
+	    c.insets = new Insets(1, 1, 1, 1);
+	    c.fill = GridBagConstraints.BOTH;
 		
+	    // Slider
 		final JLabel jlw = new JLabel("Minefield width");
-		jlw.setBounds(5, 0, 100, 20);
+		final JSlider jsw = new JSlider();
+		jsw.setMinimum(8);
+		jsw.setMaximum(32);
 		
-		// Height
-		final JSlider jsh = new JSlider();
-		jsh.setBounds(95, 22, 100, 20);
-		jsh.setMinimum(8);
-		jsh.setMaximum(40);
+		c.gridx = 0;
+		c.gridy = 0;
+		jp.add(jlw, c);
+		c.gridx = 1;
+		c.gridy = 0;
+		jp.add(jsw, c);
 		
+		// Slider
 		final JLabel jlh = new JLabel("Minefield height");
-		jlh.setBounds(5, 20, 100, 20);
+		final JSlider jsh = new JSlider();
+		jsh.setMinimum(8);
+		jsh.setMaximum(32);
 		
-		// Difficulty
+		c.gridx = 0;
+		c.gridy = 1;
+		jp.add(jlh, c);
+		c.gridx = 1;
+		c.gridy = 1;
+		jp.add(jsh, c);
+		
+		// Sliders
+		final JLabel jld = new JLabel("Difficulty");
 		final JSlider jsd = new JSlider();
-		jsd.setBounds(95, 42, 100, 20);
 		jsd.setMinimum(0);
 		jsd.setMaximum(100);
 		
-		final JLabel jld = new JLabel("Difficulty");
-		jld.setBounds(5, 40, 100, 20);
+		c.gridx = 0;
+		c.gridy = 2;
+		jp.add(jld, c);
+		c.gridx = 1;
+		c.gridy = 2;
+		jp.add(jsd, c);
 		
-		// Continue button
 		final JButton jb = new JButton("Continue");
-		jb.setBounds(200, 5, 100, 50); // X, Y, width, height
 		jb.addActionListener(e -> {
 			cont = true;
 		});
 		
+		c.gridx = 3;
+		c.gridy = 0;
+		c.gridheight = 3;
+	    jp.add(jb, c);
+		
 		// Setup frame
 		final JFrame jf = new JFrame();
-		jf.add(jb);
-		
-		jf.add(jsw);
-		jf.add(jlw);
-		
-		jf.add(jsh);
-		jf.add(jlh);
-		
-		jf.add(jsd);
-		jf.add(jld);
-		
-		jf.setSize(320, 100); 
-		jf.setLayout(null);
+		jf.add(jp);
+		jf.pack();
 		jf.setTitle("Minesweeper Config");
 		jf.setVisible(true);
 		
