@@ -29,8 +29,7 @@ public class GameState {
 		}
 		
 		// Generate at least one non-mine field
-		final int initialNonMineX = random.nextInt(config.getWidth()), initialNonMineY = random.nextInt(config.getHeight());
-		mineField[initialNonMineY][initialNonMineX] = new Field(false);
+		mineField[random.nextInt(config.getHeight())][random.nextInt(config.getWidth())] = new Field(false);
 		
 		// Link up the fields with each other, dirty.
 		for (int y = 0; y < config.getHeight(); y++) {
@@ -77,9 +76,12 @@ public class GameState {
 					neighbours.put(Direction.right, mineField[y][x + 1]);
 			}
 		}
-
-		// Uncover initial mine
-		mineField[initialNonMineY][initialNonMineX].uncover();
+		
+		// Uncover the initial field, and prefer fields with less mine neighbors.
+		Stream.of(mineField).flatMap(mf -> Stream.of(mf)).sorted((a, b) -> {
+			final int nca = a.getNeighbouringMineCount(), ncb = b.getNeighbouringMineCount();
+			return (nca > ncb) ? 1 : ((nca < ncb) ? -1 : 0);  // La Creatura...
+		}).findFirst().ifPresent(Field::uncover);
 	}
 	
 	public int getMineCount() {
