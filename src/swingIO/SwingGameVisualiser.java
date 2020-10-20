@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.*;
 
@@ -17,7 +19,9 @@ import minesweeper.IGameController;
 
 
 public class SwingGameVisualiser implements IGameVisualiser, IGameController {
-	private static final Color uncoveredFieldColor = new Color(255, 112, 102);
+	private static final Color uncoveredFieldColor = new Color(153, 139, 138);
+	private static final Color coveredFieldColor = new Color(255, 112, 102);
+	private static final Color flaggedFieldColor = new Color(227, 166, 227);
 	
 	private JFrame jf;
 	private boolean initialized;
@@ -55,10 +59,36 @@ public class SwingGameVisualiser implements IGameVisualiser, IGameController {
 		            
 		            jbMatrix[y][x] = jb;
 		            final int _x = x, _y = y;
-		            jb.addActionListener(e -> {
-		            	lastX = _x;
-		            	lastY = _y;
-		            	cont = true;
+		            jb.addMouseListener(new MouseListener() {
+						@Override
+						public void mouseClicked(final MouseEvent e) {
+							// Right click to flag fields
+							if (SwingUtilities.isRightMouseButton(e)) {
+								mineField[_y][_x].setFlagged(!mineField[_y][_x].isFlagged());
+								updateJButtons();
+								return;
+							}
+							
+							lastX = _x;
+			            	lastY = _y;
+			            	cont = true;
+						}
+
+						@Override
+						public void mousePressed(final MouseEvent e) {
+						}
+
+						@Override
+						public void mouseReleased(final MouseEvent e) {
+						}
+
+						@Override
+						public void mouseEntered(final MouseEvent e) {
+						}
+
+						@Override
+						public void mouseExited(final MouseEvent e) {
+						}
 		            });
 		         
 		            c.gridx = x;
@@ -85,15 +115,18 @@ public class SwingGameVisualiser implements IGameVisualiser, IGameController {
 	            final Field f = mineField[y][x];
 	            
 	            if (f.isUncovered()) {
-	            	jb.setBackground(Color.GRAY);
+	            	jb.setBackground(uncoveredFieldColor);
 	            	
 	            	final int mineCount = f.getNeighbouringMineCount();
 	            	if (mineCount > 0) {
 	            		jb.setText(String.valueOf(mineCount));
 		            	jb.setMargin(new Insets(0, 0, 0, 0));
 	            	}
+	            	
+	            } else if (f.isFlagged()) {
+	            	jb.setBackground(flaggedFieldColor);
 	            } else {
-	            	jb.setBackground(uncoveredFieldColor);
+	            	jb.setBackground(coveredFieldColor);
 	            }
 	        }
 	    }
