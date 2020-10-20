@@ -7,6 +7,8 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.*;
 
@@ -19,6 +21,7 @@ import minesweeper.IGameController;
 
 
 public class SwingGameVisualiser implements IGameVisualiser, IGameController {
+	private static final Color innerBorderColor = Color.PINK, outerBorderColor = Color.YELLOW;
 	private static final Color uncoveredFieldColor = new Color(153, 139, 138);
 	private static final Color coveredFieldColor = new Color(255, 112, 102);
 	private static final Color flaggedFieldColor = new Color(227, 166, 227);
@@ -36,8 +39,14 @@ public class SwingGameVisualiser implements IGameVisualiser, IGameController {
 	public void onFieldUpdate(final GameState gameState) {
 		if (!initialized) {
 			initialized = true;
-			jf = new JFrame();
 			mineField = gameState.getMineField();
+			
+			jf = new JFrame();
+			jf.addWindowListener(new WindowAdapter() {
+				public void windowClosing(final WindowEvent e){
+					System.exit(0);
+				}
+			});
 			
 			final Config config = gameState.getConfig();
 			jbMatrix = new JButton[config.getHeight()][config.getWidth()];
@@ -116,7 +125,7 @@ public class SwingGameVisualiser implements IGameVisualiser, IGameController {
 	            
 	            if (f.isUncovered()) {
 	            	if (f.inInnerBorder()) {
-	            		jb.setBackground(Color.PINK);
+	            		jb.setBackground(innerBorderColor);
 	            		
 	            	} else {
 	            		jb.setBackground(uncoveredFieldColor);
@@ -132,7 +141,7 @@ public class SwingGameVisualiser implements IGameVisualiser, IGameController {
 	            	jb.setBackground(flaggedFieldColor);
 	            	
 	            } else if (f.inOuterBorder()) {
-	            	jb.setBackground(Color.YELLOW);
+	            	jb.setBackground(outerBorderColor);
 	            
 	            } else {
 	            	jb.setBackground(coveredFieldColor);
@@ -150,12 +159,14 @@ public class SwingGameVisualiser implements IGameVisualiser, IGameController {
 	public void onGameOver(final Coords c) {
 		JOptionPane.showMessageDialog(jf, "You lost!");
 		jf.setVisible(false);
+		System.exit(0);
 	}
 
 	@Override
 	public void onGameWon(final Coords c) {
 		JOptionPane.showMessageDialog(jf, "You won!");
 		jf.setVisible(false);
+		System.exit(0);
 	}
 
 	@Override
