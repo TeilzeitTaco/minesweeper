@@ -37,7 +37,6 @@ public class SwingGameVisualiser implements IGameVisualiser, IGameController {
 		if (!initialized) {
 			initialized = true;
 			jf = new JFrame();
-			jf.setTitle("Swing Minesweeper");
 			mineField = gameState.getMineField();
 			
 			final Config config = gameState.getConfig();
@@ -102,6 +101,7 @@ public class SwingGameVisualiser implements IGameVisualiser, IGameController {
 			jf.setVisible(true);
 		}
 		
+		updateTitle(gameState);
 		updateJButtons();
 	}
 	
@@ -130,6 +130,11 @@ public class SwingGameVisualiser implements IGameVisualiser, IGameController {
 	            }
 	        }
 	    }
+	}
+	
+	private void updateTitle(final GameState gameState) {
+		final int remainingFieldsCount = gameState.getFieldCount() - gameState.getUncoveredFieldCount();
+		jf.setTitle(String.format("Swing Minesweeper [%d fields remaining, %d mines]", remainingFieldsCount, gameState.getMineCount()));
 	}
 
 	@Override
