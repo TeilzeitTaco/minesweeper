@@ -10,6 +10,6 @@ package minesweeper;
  */
 public interface IGameFrontend {
 	IGameConfigurator getGameConfigurator();
-	IGameController getGameController();
-	IGameVisualiser getGameVisualiser();
+	IGameController getGameController(final Config config);
+	IGameVisualiser getGameVisualiser(final Config config);
 }

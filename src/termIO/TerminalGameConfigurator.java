@@ -30,7 +30,7 @@ public class TerminalGameConfigurator implements IGameConfigurator {
 			final float difficulty = scanner.nextFloat();
 			
 			scanner.close();
-			return new Config(width, height, difficulty);
+			return new Config(width, height, difficulty, false);
 			
 		} catch(final InputMismatchException e) {
 			System.out.println(" \nInvalid input!");

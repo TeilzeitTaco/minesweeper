@@ -48,7 +48,7 @@ public class SwingGameConfigurator implements IGameConfigurator {
 		c.gridy = 1;
 		jp.add(jsh, c);
 		
-		// Sliders
+		// Slider
 		final JLabel jld = new JLabel("Difficulty");
 		final JSlider jsd = new JSlider();
 		jsd.setMinimum(0);
@@ -61,6 +61,18 @@ public class SwingGameConfigurator implements IGameConfigurator {
 		c.gridy = 2;
 		jp.add(jsd, c);
 		
+		// Check box
+	    final JLabel jlb = new JLabel("Enable bot");
+		final JCheckBox jcb = new JCheckBox();
+
+		c.gridx = 0;
+		c.gridy = 3;
+		jp.add(jlb, c);
+		c.gridx = 1;
+		c.gridy = 3;
+		jp.add(jcb, c);
+		
+		// Button
 		final JButton jb = new JButton("Continue");
 		jb.addActionListener(e -> {
 			cont = true;
@@ -68,7 +80,7 @@ public class SwingGameConfigurator implements IGameConfigurator {
 		
 		c.gridx = 3;
 		c.gridy = 0;
-		c.gridheight = 3;
+		c.gridheight = 4;
 	    jp.add(jb, c);
 		
 		// Setup frame
@@ -89,6 +101,6 @@ public class SwingGameConfigurator implements IGameConfigurator {
 		
 		jf.setVisible(false);
 		cont = false;  // Be reusable
-		return new Config(jsw.getValue(), jsh.getValue(), jsd.getValue() / 100f);
+		return new Config(jsw.getValue(), jsh.getValue(), jsd.getValue() / 100f, jcb.isSelected());
 	}
 }

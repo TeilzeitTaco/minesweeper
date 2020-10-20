@@ -1,5 +1,7 @@
 package roboIO;
 
+import javax.swing.JOptionPane;
+
 import minesweeper.Coords;
 import minesweeper.Field;
 import minesweeper.GameState;
@@ -51,6 +53,8 @@ public class RoboGameController implements IGameController {
 	    	}
 	    }
 	    
-	    return new Coords(0, 0);
+	    JOptionPane.showMessageDialog(null, "Impossible without guessing!");
+		System.exit(0);
+		return null;
 	}
 }

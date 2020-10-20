@@ -11,17 +11,20 @@ import swingIO.SwingGameFrontend;
 public class MineSweeper {
 	public static void main(final String[] args) {
 		// All the dirty non-pure game code has been
-		// pushed away into these interfaces.		
+		// pushed away into these interfaces.
 		final IGameFrontend gameFrontend = new SwingGameFrontend();
 		
+		// The configurator is the earliest called interface
 		final IGameConfigurator gameConfigurator = gameFrontend.getGameConfigurator();
-		final IGameVisualiser gameVisualiser = gameFrontend.getGameVisualiser();
-		final IGameController gameController = gameFrontend.getGameController();
+		final Config config = gameConfigurator.getConfig();
 		
-		final GameState gameState = new GameState(gameConfigurator.getConfig());
-		while(true) {
-			gameVisualiser.onFieldUpdate(gameState);
-			
+		final IGameVisualiser gameVisualiser = gameFrontend.getGameVisualiser(config);
+		final IGameController gameController = gameFrontend.getGameController(config);
+		
+		final GameState gameState = new GameState(config);
+		gameVisualiser.onFieldUpdate(gameState);
+		
+		while(true) {			
 			// Let the player pick a new field
 			final Coords c = gameController.getNextFieldToUncover(gameState);
 			final Field f = gameState.getField(c);
@@ -30,15 +33,17 @@ public class MineSweeper {
 			if (f.isUncovered()) {
 				gameVisualiser.onIllegalMove(c);
 				continue;
-			} 
-			
-			f.uncover();
+			}
 			
 			if (f.isMine()) {
 				gameVisualiser.onGameOver(c);
 				break;
+				
+			} else {
+				f.uncover();
 			}
 			
+			gameVisualiser.onFieldUpdate(gameState);
 			if (gameState.getFieldCount() - gameState.getUncoveredFieldCount() == gameState.getMineCount()) {
 				gameVisualiser.onGameWon(c);
 				break;

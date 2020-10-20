@@ -1,5 +1,6 @@
 package termIO;
 
+import minesweeper.Config;
 import minesweeper.IGameConfigurator;
 import minesweeper.IGameController;
 import minesweeper.IGameFrontend;
@@ -13,12 +14,12 @@ public class TerminalGameFrontend implements IGameFrontend {
 	}
 
 	@Override
-	public IGameController getGameController() {
+	public IGameController getGameController(final Config config) {
 		return new TerminalGameController();
 	}
 
 	@Override
-	public IGameVisualiser getGameVisualiser() {
+	public IGameVisualiser getGameVisualiser(final Config config) {
 		return new TerminalGameVisualiser();
 	}
 }
