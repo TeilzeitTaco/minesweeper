@@ -115,7 +115,12 @@ public class SwingGameVisualiser implements IGameVisualiser, IGameController {
 	            final Field f = mineField[y][x];
 	            
 	            if (f.isUncovered()) {
-	            	jb.setBackground(uncoveredFieldColor);
+	            	if (f.inInnerBorder()) {
+	            		jb.setBackground(Color.PINK);
+	            		
+	            	} else {
+	            		jb.setBackground(uncoveredFieldColor);
+	            	}
 	            	
 	            	final int mineCount = f.getNeighbouringMineCount();
 	            	if (mineCount > 0) {
@@ -125,6 +130,10 @@ public class SwingGameVisualiser implements IGameVisualiser, IGameController {
 	            	
 	            } else if (f.isFlagged()) {
 	            	jb.setBackground(flaggedFieldColor);
+	            	
+	            } else if (f.inOuterBorder()) {
+	            	jb.setBackground(Color.YELLOW);
+	            
 	            } else {
 	            	jb.setBackground(coveredFieldColor);
 	            }

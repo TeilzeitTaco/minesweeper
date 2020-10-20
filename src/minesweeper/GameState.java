@@ -79,7 +79,7 @@ public class GameState {
 		
 		// Uncover the initial field, and prefer fields with less mine neighbors.
 		Stream.of(mineField).flatMap(mf -> Stream.of(mf)).sorted((a, b) -> {
-			final int nca = a.getNeighbouringMineCount(), ncb = b.getNeighbouringMineCount();
+			final int nca = a._getNeighbouringMineCount(), ncb = b._getNeighbouringMineCount();
 			return (nca > ncb) ? 1 : ((nca < ncb) ? -1 : 0);  // La Creatura...
 		}).findFirst().ifPresent(Field::uncover);
 	}

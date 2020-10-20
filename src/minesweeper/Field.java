@@ -13,9 +13,9 @@ import java.util.HashMap;
 public class Field {
 	private final HashMap<Direction, Field> neighbours = new HashMap<>();
 	private final boolean mine;
-	private boolean uncovered, flagged;
 	
 	private byte cachedNeighbouringMineCount = -1;
+	private boolean uncovered, flagged;
 	
 	public Field(final boolean mine) {
 		this.mine = mine;
@@ -36,10 +36,30 @@ public class Field {
 	}
 	
 	public void setFlagged(final boolean flagged) {
+		if (uncovered)
+			throw new IllegalStateException("Attempted to flag uncovered field!");
+			
 		this.flagged = flagged;
 	}
 	
+	/**
+	 * Get the count of neighboring mines, and check for permission.
+	 * 
+	 * @return The count of mines.
+	 */
 	public byte getNeighbouringMineCount() {
+		if (!uncovered)
+			throw new IllegalStateException("Attempted to read mine count of covered field!");
+		
+		return _getNeighbouringMineCount();
+	}
+	
+	/**
+	 * getNeighbouringMineCount() without permission checks.
+	 * 
+	 * @return The count of mines.
+	 */
+	@Package byte _getNeighbouringMineCount() {
 		// This, in general, doesn't change at all.
 		if (cachedNeighbouringMineCount == -1) {
 			cachedNeighbouringMineCount = (byte) neighbours
@@ -51,12 +71,47 @@ public class Field {
 		return cachedNeighbouringMineCount;
 	}
 	
-	@Package boolean isMine() {
-		return mine;
+	public byte getNeighbouringFlagCount() {
+		return (byte) neighbours
+				.values().stream()
+				.filter(Field::isFlagged)
+				.count();
 	}
 	
-	@Package HashMap<Direction, Field> getNeighbours() {
+	public byte getNeighbouringCoveredFieldCount() {
+		return (byte) neighbours
+				.values().stream()
+				.filter(f -> !f.isUncovered())
+				.count();
+	}
+	
+	/** 
+	 * @return true if this field touches the inner side of the border
+	 */
+	public boolean inInnerBorder() {
+		return uncovered && neighbours
+				.values().stream()
+				.filter(f -> !f.isUncovered())
+				.count() > 0;
+	}
+	
+	/** 
+	 * @return true if this field touches the outer side of the border
+	 */
+	public boolean inOuterBorder() {
+		return !uncovered && neighbours
+				.values().stream()
+				.filter(Field::isUncovered)
+				.count() > 0;
+	}
+	
+	public HashMap<Direction, Field> getNeighbours() {
 		return neighbours;
+	}
+	
+	
+	@Package boolean isMine() {
+		return mine;
 	}
 	
 	/**
