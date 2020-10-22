@@ -67,7 +67,7 @@ public class SwingGameConfigurator implements IGameConfigurator {
 		final JLabel jls = new JLabel("Seed");
 		final JTextField jts = new JTextField();
 		
-		jts.setText(String.valueOf(random.nextInt(1000000)));
+		jts.setText(String.valueOf(random.nextInt(2147483647)));
 
 		c.gridx = 0;
 		c.gridy = 3;

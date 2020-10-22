@@ -83,7 +83,6 @@ public class GameState {
 			}
 			
 			uncoverStartingField();
-			System.out.print("*");
 		} while (!isSolvable());	
 	}
 	
