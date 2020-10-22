@@ -13,6 +13,9 @@ public class RoboGameController implements IGameController {
 	public Coords getNextFieldToUncover(final GameState gameState) {
 		final Field[][] mineField = gameState.getMineField();
 		
+		// This is essentially the same logic as the internal solver / validator,
+		// but implemented as a controller module.
+		
 		try {
 			Thread.sleep(100);
 		} catch (InterruptedException e) {
@@ -21,8 +24,8 @@ public class RoboGameController implements IGameController {
 		
 		// Get all fields touching the border from the inside,
 		// and flag known mines
-		for (Field[] fr : mineField) {
-			for (Field f : fr) {
+		for (final Field[] fr : mineField) {
+			for (final Field f : fr) {
 				if (!f.inInnerBorder() || f.getNeighbouringCoveredFieldCount() != f.getNeighbouringMineCount())
 					continue;
 				
@@ -43,7 +46,7 @@ public class RoboGameController implements IGameController {
 	    		if (!f.inOuterBorder() || f.isFlagged())
 	    			continue;
 	    		
-	    		for (Field n : f.getNeighbours().values()) {
+	    		for (final Field n : f.getNeighbours().values()) {
 	    			if (!n.isUncovered())
 	    				continue;
 	    			

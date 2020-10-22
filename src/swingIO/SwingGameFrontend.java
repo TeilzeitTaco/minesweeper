@@ -21,6 +21,7 @@ public class SwingGameFrontend implements IGameFrontend {
 	public IGameController getGameController(final Config config) {
 		if (config.getUseBot())
 			return new RoboGameController();
+		
 		return sgv;
 	}
 

@@ -1,6 +1,11 @@
 package minesweeper;
 
 
+/**
+ * A pair of integers representing coordinates.
+ * 
+ * @author SeiJ
+ */
 public final class Coords {
 	private final int x, y;
 	

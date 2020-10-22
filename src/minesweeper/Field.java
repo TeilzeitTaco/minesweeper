@@ -132,4 +132,11 @@ public class Field {
 				.forEach(Field::uncover);
 		}
 	}
+	
+	@Package void cover() throws IllegalStateException {
+		if (!uncovered)
+			throw new IllegalStateException("Attempted to double-cover field!");
+		
+		uncovered = false;
+	}
 }

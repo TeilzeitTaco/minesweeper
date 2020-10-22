@@ -44,7 +44,7 @@ public class MineSweeper {
 			}
 			
 			gameVisualiser.onFieldUpdate(gameState);
-			if (gameState.getFieldCount() - gameState.getUncoveredFieldCount() == gameState.getMineCount()) {
+			if (gameState.isFinished()) {
 				gameVisualiser.onGameWon(c);
 				break;
 			}

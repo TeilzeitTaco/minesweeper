@@ -29,8 +29,11 @@ public class TerminalGameConfigurator implements IGameConfigurator {
 			System.out.print(" Enter difficulty (0.0 - 1.0): ");
 			final float difficulty = scanner.nextFloat();
 			
+			System.out.print(" Enter seed value: ");
+			final int seed = scanner.nextInt();
+			
 			scanner.close();
-			return new Config(width, height, difficulty, false);
+			return new Config(width, height, seed, difficulty, false);
 			
 		} catch(final InputMismatchException e) {
 			System.out.println(" \nInvalid input!");

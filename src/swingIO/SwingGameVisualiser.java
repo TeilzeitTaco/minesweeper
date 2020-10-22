@@ -77,6 +77,9 @@ public class SwingGameVisualiser implements IGameVisualiser, IGameController {
 								return;
 							}
 							
+							if (mineField[_y][_x].isFlagged())
+								return;
+							
 							lastX = _x;
 			            	lastY = _y;
 			            	cont = true;
