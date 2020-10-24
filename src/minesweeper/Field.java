@@ -125,11 +125,14 @@ public class Field {
 			throw new IllegalStateException("Attempted to double-uncover field!");
 		
 		uncovered = true;
-		if (getNeighbouringMineCount() == 0) {
-			neighbours
-				.values().stream()
-				.filter(e -> !e.isUncovered())
-				.forEach(Field::uncover);
+		if (getNeighbouringMineCount() > 0)
+			return;
+		
+		// Using the stream API for this causes a
+		// StackOverflowException (too many functions called)
+		for (final Field f : neighbours.values()) {
+			if (!f.isUncovered())
+				f.uncover();
 		}
 	}
 	

@@ -33,8 +33,9 @@ public class GameState {
 				}
 			}
 			
-			// Generate at least one non-mine field
+			// Generate at least one mine and one non-mine field
 			mineField[random.nextInt(config.getHeight())][random.nextInt(config.getWidth())] = new Field(false);
+			mineField[random.nextInt(config.getHeight())][random.nextInt(config.getWidth())] = new Field(true);
 			
 			// Link up the fields with each other, dirty.
 			for (int y = 0; y < config.getHeight(); y++) {
